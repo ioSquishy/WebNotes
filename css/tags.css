@@ -1,0 +1,7 @@
+.copiable {
+    background-image: url("../icons/copiable_icon.svg");
+    padding-right: 15px;
+    background-size: 15px;
+    background-repeat: no-repeat;
+    background-position: right;
+}

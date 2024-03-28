@@ -1,0 +1,90 @@
+* {
+    /* for type beat */
+    --primary-color: rgb(128, 188, 189);
+    --secondary-color: rgb(170, 217, 187);
+    --accent-color: rgb(213, 240, 193); 
+    --base-color: rgb(232, 242, 242);
+
+    /* blublublu */
+    /* --primary-color: rgb(117, 106, 182);
+    --secondary-color: rgb(172, 135, 197);
+    --accent-color: rgb(224, 174, 208);
+    --base-color: rgb(252, 238, 238);
+    
+    --icon-colors: rgb(255, 255, 255);
+    
+    --text-color: rgb(255, 255, 255);
+    --header-text-color: black;
+    --nav-text-color: var(--text-color);
+    --tag-text-color: var(--text-color); */
+}
+
+body {
+    background-color: var(--base-color);
+}
+
+textarea, div {
+    color: var(--text-color); 
+}
+
+textarea::placeholder {
+    color: var(--text-color);
+    opacity: 70%;
+}
+
+.pageHeader {
+    border-radius: 20px;
+}
+
+#pageHeader {
+    margin-left: 20px;
+    color: var(--header-text-color);
+}
+
+.stickyHeaderSelector {
+    background-color: var(--primary-color);
+    border-radius: 1em;
+    margin: 1em;
+}
+
+#navWrapper {
+    background-color: var(--secondary-color);
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+}
+
+#navWrapper a {
+    /* background-color: rgb(236, 236, 236); */
+    /* border-radius: 0.5em; */
+    color: var(--nav-text-color);
+}
+
+.addSectionButton {
+    background-color: var(--accent-color);
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+}
+
+section {
+    background-color: var(--primary-color);
+    border-radius: 1em;
+    margin-bottom: 20px;
+}
+
+.sectionHeader {
+    background-color: var(--secondary-color);
+    border-top-left-radius: 1em;
+}
+
+.sectionText {
+    background-color: var(--accent-color);
+    border-bottom-left-radius: 1em;
+}
+
+.copiable {
+    color: var(--tag-text-color);
+}
+
+* {
+    /* border: red solid; */
+}

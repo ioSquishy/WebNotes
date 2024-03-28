@@ -1,0 +1,183 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    display: grid;
+    grid-template-areas: 
+        "utils pageHeader"
+        "nav section";
+    align-items: start;
+}
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    --right-max-width: 80dvw;
+    --left-max-width: 20dvw;
+}
+
+.utils {
+    grid-area: utils;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    column-gap: 15px;
+}
+
+.utils button {
+    width: 25px;
+    height: 25px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#saveNotesButton {
+    background-image: url(../icons/save_icon.svg);
+}
+
+#loadNotesButton {
+    background-image: url(../icons/folder_icon.svg);
+}
+
+#newPageButton {
+    background-image: url(../icons/blank-page_icon.svg);
+}
+
+.pageHeader {
+    width: 100%;
+    padding-top: 2dvh;
+    padding-bottom: 2dvh;
+    height: 2.5em;
+    grid-area: pageHeader;
+}
+
+.pageHeader textarea {
+    height: 55px;
+    border: none;
+    padding: 0;
+    outline: none;
+    width: auto;
+    font-size: 2.5em;
+}
+
+.headerSelector {
+    grid-area: nav;
+    font-size: 1.25em;
+    max-width: var(--left-max-width);
+    height: 100%;
+    text-align: center;
+}
+
+.stickyHeaderSelector {
+    position: sticky;
+    top: 12dvh;
+}
+
+#navWrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+#navWrapper a {
+    all: unset;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+    cursor: pointer;
+
+    max-width: var(--left-max-width);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.addSectionButton {
+    height: 20px;
+    width: 100%;
+    background-image: url(../icons/plus_icon.svg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#sectionWrapper {
+    grid-area: section;
+    display: flexbox;
+    flex-direction: column;
+}
+
+section {
+    width: var(--right-max-width);
+    --section-height: 20dvh;
+    min-height: var(--section-height);
+    padding-top: 20px;
+    padding-bottom: 30px;
+    white-space: pre;
+
+    display: grid;
+    grid-template-areas: 
+        "edit header"
+        ". text";
+    grid-template-rows: max-content;
+    grid-template-columns: max-content;
+    align-items: start;
+}
+
+.editButton {
+    width: 50px;
+    height: 100%;
+    grid-area: edit;
+    background-image: url(../icons/edit_icon.svg);
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position-y: center;
+    background-position-x: 70%;
+}
+
+.sectionHeader {
+    padding: 12px;
+    font-size: 1.5em;
+    height: 1.5em;
+    grid-area: header;
+    line-clamp: 1;
+
+    max-width: var(--right-max-width);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+textarea {
+    resize: none;
+    background-color: unset;
+    outline: none;
+    width: auto;
+}
+
+.sectionText {
+    min-height: var(--section-height);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-all;
+    /* overflow: scroll; */
+    margin: 0;
+    padding: 1em;
+    font-size: 1em;
+    grid-area: text;
+    width: auto;
+    scrollbar-width: none;
+}
+
+button {
+    all: unset;
+    cursor: pointer;
+}

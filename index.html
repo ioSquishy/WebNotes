@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.1">
+        <title>WebNotes</title>
+        <link rel="stylesheet" href="./css/core.css">
+        <link rel="stylesheet" href="./css/tags.css">
+        <link rel="stylesheet" href="./css/theme.css">
+    </head>
+    <body>
+        <!-- Page Header -->
+        <header class="pageHeader">
+            <textarea id="pageHeader" fixedheight spellcheck="false">WebNotes</textarea>
+        </header>
+
+        <!-- Save/Load Button -->
+        <div class="utils">
+            <button id="saveNotesButton" onclick="saveJSON()" title="save notes"></button>
+
+            <button id="loadNotesButton" onclick="loadNotes()" title="load notes"></button>
+            <input type="file" id="file-input" style="display: none;" onchange="loadJSON(event)"/>
+
+            <button id="newPageButton" onclick="newNotePage()" title="new web note"></button>
+        </div>
+
+        <!-- Navigation -->
+        <div class="headerSelector">
+            <div class="stickyHeaderSelector">
+                <div id="navWrapper">
+                    <!-- Inserted via Templates and JS -->
+                </div>
+                <button class="addSectionButton" onclick="addNewSection()" title="add section"></button>
+            </div>
+        </div>
+
+        <!-- Sections -->
+        <div id="sectionWrapper">
+            <!-- Inserted via Templates and JS -->
+        </div>
+
+        <!-- Templates -->
+        <template id="navTemplate">
+            <a href="#sec" id="navLink">Header</a>
+        </template>
+        <template id="sectionTemplate">
+            <section id="sec" editing="true">
+                <button class="editButton" onclick="toggleTextArea(this.parentNode.id)" title="edit section"></button>
+
+                <textarea class="sectionHeader" name="rawHeader" placeholder="Header"></textarea>
+                <div class="sectionHeader" name="cookedHeader" style="display: none;"></div>
+
+                <textarea class="sectionText" name="rawText" placeholder="..."></textarea>
+                <div class="sectionText" name="cookedText" style="display: none;"></div>
+            </section>
+        </template>
+        
+        <!-- Scripts -->
+        <script src="./js/core.js"></script>
+        <script src="./js/tags.js"></script>
+        <script src="./js/data.js"></script>
+    </body>
+</html>

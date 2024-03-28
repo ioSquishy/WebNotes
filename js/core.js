@@ -1,0 +1,130 @@
+// text area event listener functions
+const pageHeader = document.getElementById("pageHeader");
+const scrollOffset = 31;
+
+pageHeader.addEventListener("keydown", (event) => preventNewLine(event), false);
+
+/**
+ * Adjusts textarea height to prevent need for scrolling
+ */
+function adjustTextareaHeight() {
+    this.style.height = 'fit-content';
+    this.style.height = (this.scrollHeight - scrollOffset) + "px";
+}
+
+/**
+ * Prevents the addition of a new line to a textarea
+ * @param {*} event 
+ */
+function preventNewLine(event) {
+    if (event.key == "Enter") {
+        event.preventDefault();
+    }
+}
+
+// header/section text code
+/**
+ * Toggles a textarea so it is no longer editable, replacing the innerHTML
+ * of its sibling div with processed/cooked text.
+ * 
+ * Also saves current data to local web api storage and sets save button to
+ * changes unsaved icon.
+ * @param {String} id 
+ */
+function toggleTextArea(id) {
+    let section = document.getElementById(id);
+    let textAreas = section.getElementsByTagName("TEXTAREA");
+    let textDivs = section.getElementsByTagName("DIV");
+
+    let headerTextArea = textAreas.namedItem("rawHeader");
+    let headerDiv = textDivs.namedItem("cookedHeader");
+    let sectionTextArea = textAreas.namedItem("rawText");
+    let sectionTextDiv = textDivs.namedItem("cookedText");
+
+    // if section is currently being editted
+    if (section.getAttribute("editing") == "true") {
+        // hide text areas
+        headerTextArea.style.display = "none";
+        sectionTextArea.style.display = "none";
+        // update divs
+        let headerHTML = rawToHTML(headerTextArea.value);
+        headerDiv.innerHTML = headerHTML;
+        sectionTextDiv.innerHTML = rawToHTML(sectionTextArea.value);
+        // display divs
+        headerDiv.style.display = "unset";
+        sectionTextDiv.style.display = "unset";
+        // update nav header
+        updateHeader(section.id, headerHTML);
+        // set editing attribute to false
+        section.setAttribute("editing", "false");
+        // save data locally
+        saveToLocalStorage();
+        // offline changes saved false
+        changesSavedOffline(false);
+    } else {
+        // display text areas
+        headerTextArea.style.display = "unset";
+        sectionTextArea.style.display = "unset";
+        // hide divs
+        headerDiv.style.display = "none";
+        sectionTextDiv.style.display = "none";
+        // set editing attribute to true
+        section.setAttribute("editing", "true");
+    }
+}
+
+/**
+ * Updates the header of the section with provided secID to provided html
+ * @param {String} secID section ID (without "nav" ending) of header to update
+ * @param {String} html html to set header innerHTMl to
+ */
+function updateHeader(secID, html) {
+    document.getElementById(secID + "nav").innerHTML = html;
+}
+
+// template code
+const sectionWrapper = document.getElementById("sectionWrapper");
+const sectionTemplate = document.getElementById("sectionTemplate");
+var numSections = 0;
+
+/**
+ * Clones and fills out a sectionTemplate, appending it to the sectionWrapper
+ * Adds event listeners to the section
+ */
+function addSection() {
+    let clone = sectionTemplate.content.cloneNode(true);
+    // set section id
+    let sectionId = "sec" + numSections;
+    clone.getElementById("sec").id = sectionId;
+    // add template to wrapper
+    sectionWrapper.appendChild(clone);
+    // set event listeners for text areas
+    let textareas = document.getElementById(sectionId).getElementsByTagName("textarea");
+    textareas.namedItem("rawHeader").addEventListener("keydown", (event) => preventNewLine(event), false);
+    let sectionTextarea = textareas.namedItem("rawText")
+    sectionTextarea.setAttribute("style", "height:" + (sectionTextarea.scrollHeight - scrollOffset) + "px;");
+    sectionTextarea.addEventListener("input", adjustTextareaHeight, false);
+}
+
+const navWrapper = document.getElementById("navWrapper");
+const navTemplate = document.getElementById("navTemplate");
+
+/**
+ * Clones and fills out a navTemplate, appending it to the navWrapper
+ */
+function addSectionNav() {
+    let clone = navTemplate.content.cloneNode(true);
+    clone.getElementById("navLink").href = "#sec" + numSections;
+    clone.getElementById("navLink").id = "sec" + numSections + "nav";
+    navWrapper.appendChild(clone);
+}
+
+/**
+ * Increass the numSections variable and 
+ * then calls addSectionNav() and addSection()
+ */
+function addNewSection() {
+    numSections++;
+    addSectionNav();
+    addSection();
+}
