@@ -10,13 +10,14 @@ body {
     grid-template-areas: 
         "utils pageHeader"
         "nav section";
+    grid-template-columns: 15dvw auto;
     align-items: start;
 }
 
 * {
     font-family: Arial, Helvetica, sans-serif;
     --right-max-width: 80dvw;
-    --left-max-width: 20dvw;
+    --left-max-width: 15dvw;
 }
 
 .utils {
@@ -27,12 +28,12 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    column-gap: 15px;
+    column-gap: 7%;
 }
 
 .utils button {
-    width: 25px;
-    height: 25px;
+    width: 2em;
+    height: 2em;
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -62,15 +63,22 @@ body {
     border: none;
     padding: 0;
     outline: none;
-    width: auto;
+    width: 98%;
     font-size: 2.5em;
+    scrollbar-width: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-clamp: 1;
 }
 
 .headerSelector {
     grid-area: nav;
     font-size: 1.25em;
-    max-width: var(--left-max-width);
+    /* max-width: 20dvw; */
+    width: 100%;
     height: 100%;
+    /* justify-self: center; */
     text-align: center;
 }
 
@@ -87,20 +95,14 @@ body {
 
 #navWrapper a {
     all: unset;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-top: 2.5px;
-    margin-bottom: 2.5px;
     cursor: pointer;
-
-    max-width: var(--left-max-width);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
 .addSectionButton {
-    height: 20px;
+    height: 1em;
     width: 100%;
     background-image: url(../icons/plus_icon.svg);
     background-size: contain;
@@ -115,7 +117,7 @@ body {
 }
 
 section {
-    width: var(--right-max-width);
+    width: 98%;
     --section-height: 20dvh;
     min-height: var(--section-height);
     padding-top: 20px;
@@ -149,7 +151,7 @@ section {
     grid-area: header;
     line-clamp: 1;
 
-    max-width: var(--right-max-width);
+    max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
