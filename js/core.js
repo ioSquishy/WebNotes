@@ -1,8 +1,10 @@
 // text area event listener functions
 const pageHeader = document.getElementById("pageHeader");
+const pageTitle = document.getElementById("title");
 const scrollOffset = 31;
 
 pageHeader.addEventListener("keydown", (event) => preventNewLine(event), false);
+pageHeader.addEventListener("input", updateWebTitle, false);
 
 /**
  * Adjusts textarea height to prevent need for scrolling
@@ -20,6 +22,10 @@ function preventNewLine(event) {
     if (event.key == "Enter") {
         event.preventDefault();
     }
+}
+
+function updateWebTitle() {
+    pageTitle.innerText = pageHeader.value;
 }
 
 // header/section text code

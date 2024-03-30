@@ -119,8 +119,9 @@ function loadData() {
     sectionWrapper.innerHTML = "";
     numSections = 0;
     
-    // set page header
+    // set page header and title
     pageHeader.value = data.pageHeader;
+    pageTitle.innerText = data.pageHeader;
     // add sections
     data.sections.forEach(section => {
         addNewSection();
