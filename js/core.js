@@ -24,6 +24,9 @@ function preventNewLine(event) {
     }
 }
 
+/**
+ * Sets the web title to the page header
+ */
 function updateWebTitle() {
     pageTitle.innerText = pageHeader.value;
 }
@@ -133,4 +136,19 @@ function addNewSection() {
     numSections++;
     addSectionNav();
     addSection();
+}
+
+// section highlighting code
+/**
+ * Adds the 'hightlight' class to an element based on its id and then removes it
+ * after 1 second.
+ * @param {String} id id of element to temporarily highlight
+ */
+function highlightSection(id) {
+    console.log(id);
+    let target = document.getElementById(id);
+    target.classList.add('highlight');
+
+    // remove highlight after 1 second
+    setTimeout(() => {target.classList.remove('highlight')}, 500);
 }

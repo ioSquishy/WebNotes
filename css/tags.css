@@ -5,3 +5,7 @@
     background-repeat: no-repeat;
     background-position: right;
 }
+
+.copiable:hover {
+    color: rgb(109, 109, 109);
+}

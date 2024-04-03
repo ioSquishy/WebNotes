@@ -1,5 +1,5 @@
 * {
-    /* for type beat */
+    /* frog */
     --primary-color: rgb(128, 188, 189);
     --secondary-color: rgb(170, 217, 187);
     --accent-color: rgb(213, 240, 193); 
@@ -89,6 +89,7 @@ section {
     color: var(--tag-text-color);
 }
 
-* {
-    /* border: red solid; */
-}
+/* for debugging */
+/* * {
+    border: red solid;
+} */
