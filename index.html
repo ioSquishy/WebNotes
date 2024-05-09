@@ -47,6 +47,7 @@
         <template id="sectionTemplate">
             <section id="sec" editing="true">
                 <button class="editButton" onclick="toggleTextArea(this.parentNode.id)" title="edit section"></button>
+                <button class="deleteButton" onclick="deleteSection(this.parentNode.id)" title="delete section"></button>
 
                 <textarea class="sectionHeader" name="rawHeader" placeholder="Header"></textarea>
                 <div class="sectionHeader" name="cookedHeader" style="display: none;"></div>

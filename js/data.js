@@ -124,7 +124,7 @@ function loadData() {
     pageTitle.innerText = data.pageHeader;
     // add sections
     data.sections.forEach(section => {
-        addNewSection();
+        addNewSection(section.id);
         let addedSection = document.getElementById(section.id);
         addedSection.getElementsByClassName("sectionHeader").namedItem("rawHeader").value = section.rawHeader;
         addedSection.getElementsByClassName("sectionText").namedItem("rawText").value = section.rawText;

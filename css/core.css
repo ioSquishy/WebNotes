@@ -144,9 +144,20 @@ section {
 
 .editButton {
     width: 50px;
-    height: 100%;
-    grid-area: edit;
+    height: 50px;
+    /* grid-area: edit; */
     background-image: url(../icons/edit_icon.svg);
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position-y: center;
+    background-position-x: 70%;
+}
+
+.deleteButton {
+    width: 50px;
+    height: 50px;
+    /* grid-area: edit; */
+    background-image: url(../icons/delete_icon.svg);
     background-repeat: no-repeat;
     background-size: 50%;
     background-position-y: center;

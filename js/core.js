@@ -50,8 +50,12 @@ function toggleTextArea(id) {
     let sectionTextArea = textAreas.namedItem("rawText");
     let sectionTextDiv = textDivs.namedItem("cookedText");
 
+    let deleteButton = section.getElementsByClassName("deleteButton")[0];
+
     // if section is currently being editted
     if (section.getAttribute("editing") == "true") {
+        // hide delete button
+        deleteButton.style.display = "none";
         // hide text areas
         headerTextArea.style.display = "none";
         sectionTextArea.style.display = "none";
@@ -77,6 +81,8 @@ function toggleTextArea(id) {
         // hide divs
         headerDiv.style.display = "none";
         sectionTextDiv.style.display = "none";
+        // show delete button
+        deleteButton.style.display = "unset";
         // set editing attribute to true
         section.setAttribute("editing", "true");
     }
@@ -100,15 +106,14 @@ var numSections = 0;
  * Clones and fills out a sectionTemplate, appending it to the sectionWrapper
  * Adds event listeners to the section
  */
-function addSection() {
+function addSection(id) {
     let clone = sectionTemplate.content.cloneNode(true);
     // set section id
-    let sectionId = "sec" + numSections;
-    clone.getElementById("sec").id = sectionId;
+    clone.getElementById("sec").id = id;
     // add template to wrapper
     sectionWrapper.appendChild(clone);
     // set event listeners for text areas
-    let textareas = document.getElementById(sectionId).getElementsByTagName("textarea");
+    let textareas = document.getElementById(id).getElementsByTagName("textarea");
     textareas.namedItem("rawHeader").addEventListener("keydown", (event) => preventNewLine(event), false);
     let sectionTextarea = textareas.namedItem("rawText")
     sectionTextarea.setAttribute("style", "height:" + (sectionTextarea.scrollHeight - scrollOffset) + "px;");
@@ -121,10 +126,10 @@ const navTemplate = document.getElementById("navTemplate");
 /**
  * Clones and fills out a navTemplate, appending it to the navWrapper
  */
-function addSectionNav() {
+function addSectionNav(id) {
     let clone = navTemplate.content.cloneNode(true);
-    clone.getElementById("navLink").href = "#sec" + numSections;
-    clone.getElementById("navLink").id = "sec" + numSections + "nav";
+    clone.getElementById("navLink").href = "#" + id;
+    clone.getElementById("navLink").id = id + "nav";
     navWrapper.appendChild(clone);
 }
 
@@ -132,10 +137,18 @@ function addSectionNav() {
  * Increass the numSections variable and 
  * then calls addSectionNav() and addSection()
  */
-function addNewSection() {
-    numSections++;
-    addSectionNav();
-    addSection();
+function addNewSection(customID) {
+    id = customID != null ? customID : Date.now();
+    addSectionNav(id);
+    addSection(id);
+}
+
+// delete section code
+function deleteSection(id) {
+    if (confirm("Delete this section?")) {
+        document.getElementById(id).remove();
+        document.getElementById(id + "nav").remove();
+    }
 }
 
 // section highlighting code
