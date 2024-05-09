@@ -18,7 +18,7 @@ function rawToHTML(rawText) {
     tags.forEach(tag => {
         // regex created by gpt 4.0 with some modifications by me
         let escapedTag = tag.tag.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        let regex = new RegExp(`@(${escapedTag})\\(([A-Za-z0-9_,/\\" :\\\\.]*?)\\)`, 'g');
+        let regex = new RegExp(`@(${escapedTag})\\(([@A-Za-z0-9_,/\\" :\\\\.*]*?)\\)`, 'g');
         innerHTML = innerHTML.replaceAll(regex, (match) => {
             return convertTag(tag, match);
         });
