@@ -103,6 +103,10 @@ body {
 
 #navWrapper a:hover {
     color: rgb(109, 109, 109);
+    background-image: url(../icons/grab_icon.svg);
+    background-size: contain;
+    background-position: left;
+    background-repeat: no-repeat;
 }
 
 .addSectionButton {

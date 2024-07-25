@@ -1,0 +1,2 @@
+make sections in nav be divs that contain the <a> and an an image with the grab icon on the left side
+make those divs draggable and reorder the divs depending on where they are placed after mouse is let go
