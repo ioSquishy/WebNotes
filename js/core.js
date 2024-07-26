@@ -165,3 +165,39 @@ function highlightSection(id) {
     // remove highlight after 1 second
     setTimeout(() => {target.classList.remove('highlight')}, 500);
 }
+
+// nav code
+navWrapper.addEventListener("dragstart", event => dragStart(event));
+navWrapper.addEventListener("dragenter", event => dragEnter(event));
+
+var currentlyDragging; // stores id
+
+function dragStart(event) {
+    console.log("-- Drag Start --");
+    console.log(event.target.id);
+    currentlyDragging = event.target;
+}
+
+function dragEnter(event) {
+    targetID = event.target.id;
+    if (targetID == "navWrapper" || targetID == currentlyDragging.id) {
+        return;
+    }
+
+    console.log("-- Drag Enter --");
+    insertElementBefore(currentlyDragging, event.target)
+}
+
+/**
+ * 
+ * @param {Node} e1 
+ * @param {Node} e2 
+ */
+function insertElementBefore(e1, e2) {
+    children = Array.from(e1.parentNode.children);
+    if (children.indexOf(e1) < children.indexOf(e2)) {
+        navWrapper.insertBefore(e1, e2.nextSibling);
+    } else {
+        navWrapper.insertBefore(e1, e2);
+    }
+}
