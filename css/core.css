@@ -101,6 +101,10 @@ body {
     white-space: nowrap;
 }
 
+#navWrapper a:active {
+    cursor: grabbing;
+}
+
 #navWrapper a:hover {
     color: rgb(109, 109, 109);
     background-image: url(../icons/grab_icon.svg);

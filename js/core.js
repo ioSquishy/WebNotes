@@ -170,34 +170,54 @@ function highlightSection(id) {
 navWrapper.addEventListener("dragstart", event => dragStart(event));
 navWrapper.addEventListener("dragenter", event => dragEnter(event));
 
-var currentlyDragging; // stores id
+var currentlyDragging; // stores the node
 
+/**
+ * Sets currentlyDragging variable and the drag image.
+ * @param {DragEvent} event 
+ */
 function dragStart(event) {
-    console.log("-- Drag Start --");
-    console.log(event.target.id);
+    var img = new Image(1, 1);
+    img.src = "../icons/transparent.png";
+    event.dataTransfer.setDragImage(img, 0, 0);
     currentlyDragging = event.target;
 }
 
+/**
+ * Reorders the navWrapper and sectionWrapper children nodes when dragging over other sections.
+ * @param {DragEvent} event 
+ */
 function dragEnter(event) {
+    event.preventDefault();
     targetID = event.target.id;
     if (targetID == "navWrapper" || targetID == currentlyDragging.id) {
         return;
     }
-
-    console.log("-- Drag Enter --");
     insertElementBefore(currentlyDragging, event.target)
+
+    var currentSection = document.getElementById(String(currentlyDragging.id).slice(0, -3));
+    var targetSection  = document.getElementById(String(event.target.id).slice(0, -3));
+    insertElementBefore(currentSection, targetSection);
 }
 
 /**
- * 
+ * Swaps node e1 and e2 from the perspective of their parent sibling.
+ * Will do nothing of both e1 and e2 do not have the same parent node.
  * @param {Node} e1 
  * @param {Node} e2 
  */
 function insertElementBefore(e1, e2) {
-    children = Array.from(e1.parentNode.children);
+    if (e1.parentNode != e2.parentNode) {
+        console.log("both nodes must have the same parent");
+        return;
+    }
+
+    var parentNode = e1.parentNode;
+    children = Array.from(parentNode.children);
+
     if (children.indexOf(e1) < children.indexOf(e2)) {
-        navWrapper.insertBefore(e1, e2.nextSibling);
+        parentNode.insertBefore(e1, e2.nextSibling);
     } else {
-        navWrapper.insertBefore(e1, e2);
+        parentNode.insertBefore(e1, e2);
     }
 }

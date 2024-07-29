@@ -1,2 +1,2 @@
-1. make it so when you drag the transparent box doesnt appear
-2. move sections when nav elements are moved
+1. make the the currentlyDragging nav element stay grayed out and move background image with it
+2. make cursor not turn into a no sign
