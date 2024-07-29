@@ -1,2 +1,2 @@
-1. make the the currentlyDragging nav element stay grayed out and move background image with it
+1. make the onhover nav element turn back to black once dragging has started
 2. make cursor not turn into a no sign

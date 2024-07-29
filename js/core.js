@@ -167,8 +167,10 @@ function highlightSection(id) {
 }
 
 // nav code
+const navHoverColor = getComputedStyle(document.body).getPropertyValue("--nav-text-hover-color");
 navWrapper.addEventListener("dragstart", event => dragStart(event));
 navWrapper.addEventListener("dragenter", event => dragEnter(event));
+navWrapper.addEventListener("dragend", event => dragEnd(event));
 
 var currentlyDragging; // stores the node
 
@@ -181,6 +183,7 @@ function dragStart(event) {
     img.src = "../icons/transparent.png";
     event.dataTransfer.setDragImage(img, 0, 0);
     currentlyDragging = event.target;
+    currentlyDragging.setAttribute("dragging", true);
 }
 
 /**
@@ -198,6 +201,10 @@ function dragEnter(event) {
     var currentSection = document.getElementById(String(currentlyDragging.id).slice(0, -3));
     var targetSection  = document.getElementById(String(event.target.id).slice(0, -3));
     insertElementBefore(currentSection, targetSection);
+}
+
+function dragEnd(event) {
+    currentlyDragging.setAttribute("dragging", false);
 }
 
 /**
