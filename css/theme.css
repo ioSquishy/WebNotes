@@ -70,6 +70,10 @@ textarea::placeholder {
     color: var(--nav-text-hover-color);
 }
 
+#navWrapper a:active {
+    color: var(--text-color);
+}
+
 #navWrapper a[dragging="true"] {
     color: var(--nav-text-hover-color);
 

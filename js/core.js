@@ -167,9 +167,9 @@ function highlightSection(id) {
 }
 
 // nav code
-const navHoverColor = getComputedStyle(document.body).getPropertyValue("--nav-text-hover-color");
 navWrapper.addEventListener("dragstart", event => dragStart(event));
 navWrapper.addEventListener("dragenter", event => dragEnter(event));
+navWrapper.addEventListener("dragover", event => dragOver(event));
 navWrapper.addEventListener("dragend", event => dragEnd(event));
 
 var currentlyDragging; // stores the node
@@ -179,9 +179,13 @@ var currentlyDragging; // stores the node
  * @param {DragEvent} event 
  */
 function dragStart(event) {
+    // make image transparent
     var img = new Image(1, 1);
     img.src = "../icons/transparent.png";
     event.dataTransfer.setDragImage(img, 0, 0);
+
+    event.dataTransfer.dropEffect = "none";
+    // set attributes and store target
     currentlyDragging = event.target;
     currentlyDragging.setAttribute("dragging", true);
 }
@@ -201,6 +205,14 @@ function dragEnter(event) {
     var currentSection = document.getElementById(String(currentlyDragging.id).slice(0, -3));
     var targetSection  = document.getElementById(String(event.target.id).slice(0, -3));
     insertElementBefore(currentSection, targetSection);
+}
+
+/**
+ * This is required to prevent the mouse from turning into a no-drop symbol.
+ * @param {DragEvent} event 
+ */
+function dragOver(event) {
+    event.preventDefault();
 }
 
 function dragEnd(event) {
