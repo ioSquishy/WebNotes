@@ -1,0 +1,3 @@
+1. mAybe enhance performance of insertElementBefore method so index search doesnt have to be performed for section
+2. split core.js into different files under a sub folder called core instead
+3. make copiable tag give some feedback when clicking it such as using the :hover and :active trick to make it look like it was pressed

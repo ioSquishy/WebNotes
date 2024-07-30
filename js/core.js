@@ -165,3 +165,78 @@ function highlightSection(id) {
     // remove highlight after 1 second
     setTimeout(() => {target.classList.remove('highlight')}, 500);
 }
+
+// nav code
+navWrapper.addEventListener("dragstart", event => dragStart(event));
+navWrapper.addEventListener("dragenter", event => dragEnter(event));
+navWrapper.addEventListener("dragover", event => dragOver(event));
+navWrapper.addEventListener("dragend", event => dragEnd(event));
+
+var currentlyDragging; // stores the node
+
+/**
+ * Sets currentlyDragging variable and the drag image.
+ * @param {DragEvent} event 
+ */
+function dragStart(event) {
+    // make image transparent
+    var img = new Image(1, 1);
+    img.src = "../icons/transparent.png";
+    event.dataTransfer.setDragImage(img, 0, 0);
+
+    event.dataTransfer.dropEffect = "none";
+    // set attributes and store target
+    currentlyDragging = event.target;
+    currentlyDragging.setAttribute("dragging", true);
+}
+
+/**
+ * Reorders the navWrapper and sectionWrapper children nodes when dragging over other sections.
+ * @param {DragEvent} event 
+ */
+function dragEnter(event) {
+    event.preventDefault();
+    targetID = event.target.id;
+    if (targetID == "navWrapper" || targetID == currentlyDragging.id) {
+        return;
+    }
+    insertElementBefore(currentlyDragging, event.target)
+
+    var currentSection = document.getElementById(String(currentlyDragging.id).slice(0, -3));
+    var targetSection  = document.getElementById(String(event.target.id).slice(0, -3));
+    insertElementBefore(currentSection, targetSection);
+}
+
+/**
+ * This is required to prevent the mouse from turning into a no-drop symbol.
+ * @param {DragEvent} event 
+ */
+function dragOver(event) {
+    event.preventDefault();
+}
+
+function dragEnd(event) {
+    currentlyDragging.setAttribute("dragging", false);
+}
+
+/**
+ * Swaps node e1 and e2 from the perspective of their parent sibling.
+ * Will do nothing of both e1 and e2 do not have the same parent node.
+ * @param {Node} e1 
+ * @param {Node} e2 
+ */
+function insertElementBefore(e1, e2) {
+    if (e1.parentNode != e2.parentNode) {
+        console.log("both nodes must have the same parent");
+        return;
+    }
+
+    var parentNode = e1.parentNode;
+    children = Array.from(parentNode.children);
+
+    if (children.indexOf(e1) < children.indexOf(e2)) {
+        parentNode.insertBefore(e1, e2.nextSibling);
+    } else {
+        parentNode.insertBefore(e1, e2);
+    }
+}

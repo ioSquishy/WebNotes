@@ -101,10 +101,6 @@ body {
     white-space: nowrap;
 }
 
-#navWrapper a:hover {
-    color: rgb(109, 109, 109);
-}
-
 .addSectionButton {
     height: 1em;
     width: 100%;

@@ -11,12 +11,15 @@
     --accent-color: rgb(224, 174, 208);
     --base-color: rgb(252, 238, 238);
     
-    --icon-colors: rgb(255, 255, 255);
+    --icon-colors: rgb(255, 255, 255);*/
     
-    --text-color: rgb(255, 255, 255);
+    /* text colors */
     --header-text-color: black;
+    --text-color: black;
+    --tag-text-color: var(--text-color);
+
     --nav-text-color: var(--text-color);
-    --tag-text-color: var(--text-color); */
+    --nav-text-hover-color: rgb(109, 109, 109);
 }
 
 body {
@@ -61,6 +64,24 @@ textarea::placeholder {
     margin-right: 5px;
     margin-top: 2.5px;
     margin-bottom: 2.5px;
+}
+
+#navWrapper a:hover {
+    color: var(--nav-text-hover-color);
+}
+
+#navWrapper a:active {
+    color: var(--text-color);
+}
+
+#navWrapper a[dragging="true"] {
+    color: var(--nav-text-hover-color);
+
+    cursor: grabbing;
+    background-image: url(../icons/grab_icon.svg);
+    background-size: contain;
+    background-position: left;
+    background-repeat: no-repeat;
 }
 
 .addSectionButton {
