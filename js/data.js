@@ -4,7 +4,7 @@ const data = {
     sections: []
 };
 
-var changesSaved;
+var changesSaved; // boolean
 const saveButton = document.getElementById("saveNotesButton");
 
 /**
