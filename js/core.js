@@ -175,6 +175,7 @@ navWrapper.addEventListener("dragend", event => dragEnd(event));
 var currentlyDragging; // stores the node
 
 /**
+ * Ran when user starts dragging an element.
  * Sets currentlyDragging variable and the drag image.
  * @param {DragEvent} event 
  */
@@ -191,6 +192,7 @@ function dragStart(event) {
 }
 
 /**
+ * Ran when user drags an element over another element.
  * Reorders the navWrapper and sectionWrapper children nodes when dragging over other sections.
  * @param {DragEvent} event 
  */
@@ -200,6 +202,7 @@ function dragEnter(event) {
     if (targetID == "navWrapper" || targetID == currentlyDragging.id) {
         return;
     }
+
     insertElementBefore(currentlyDragging, event.target)
 
     var currentSection = document.getElementById(String(currentlyDragging.id).slice(0, -3));
@@ -208,35 +211,41 @@ function dragEnter(event) {
 }
 
 /**
- * This is required to prevent the mouse from turning into a no-drop symbol.
+ * Ran when element is dragged over another element.
+ * Prevents default: This is required to prevent the mouse from turning into a no-drop symbol.
  * @param {DragEvent} event 
  */
 function dragOver(event) {
     event.preventDefault();
 }
 
+/**
+ * Ran when dragging ends.
+ * Sets the last dragged elements attribute "dragging" to false.
+ * @param {DragEvent} event 
+ */
 function dragEnd(event) {
     currentlyDragging.setAttribute("dragging", false);
 }
 
 /**
- * Swaps node e1 and e2 from the perspective of their parent sibling.
- * Will do nothing of both e1 and e2 do not have the same parent node.
- * @param {Node} e1 
- * @param {Node} e2 
+ * Swaps node node1 and node2 from the perspective of their parent sibling.
+ * Will do nothing of both node1 and node2 do not have the same parent node.
+ * @param {Node} node1 Element to insert.
+ * @param {Node} node2 Element to insert e1 before.
  */
-function insertElementBefore(e1, e2) {
-    if (e1.parentNode != e2.parentNode) {
+function swapNodes(node1, node2) {
+    if (node1.parentNode != node2.parentNode) {
         console.log("both nodes must have the same parent");
         return;
     }
 
-    var parentNode = e1.parentNode;
+    var parentNode = node1.parentNode;
     children = Array.from(parentNode.children);
 
-    if (children.indexOf(e1) < children.indexOf(e2)) {
-        parentNode.insertBefore(e1, e2.nextSibling);
+    if (children.indexOf(node1) < children.indexOf(node2)) {
+        parentNode.insertBefore(node1, node2.nextSibling);
     } else {
-        parentNode.insertBefore(e1, e2);
+        parentNode.insertBefore(node1, node2);
     }
 }

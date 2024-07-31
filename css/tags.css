@@ -9,3 +9,7 @@
 .copiable:hover {
     color: rgb(109, 109, 109);
 }
+
+.copiable:active {
+    color: rgb(49, 100, 140)
+}
