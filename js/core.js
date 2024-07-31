@@ -203,11 +203,11 @@ function dragEnter(event) {
         return;
     }
 
-    insertElementBefore(currentlyDragging, event.target)
+    swapNodes(currentlyDragging, event.target)
 
     var currentSection = document.getElementById(String(currentlyDragging.id).slice(0, -3));
     var targetSection  = document.getElementById(String(event.target.id).slice(0, -3));
-    insertElementBefore(currentSection, targetSection);
+    swapNodes(currentSection, targetSection);
 }
 
 /**
